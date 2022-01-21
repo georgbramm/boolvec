@@ -1,0 +1,16 @@
+[package]
+name = "boolvec"
+authors = ["Gymore <gymore.contact@gmail.com>"]
+categories = ["data-structures"]
+description = "A vector of boolean stored contiguously in memory."
+documentation = "https://docs.rs/crate/boolvec/0.1.0"
+edition = "2018"
+keywords = ["vec", "bool", "boolean"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/gymore-z/boolvec"
+version = "0.3.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
