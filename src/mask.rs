@@ -12,9 +12,10 @@ use std::cmp::{
     Ord,
     Ordering,
 };
+use serde::{Serialize, Deserialize};
 
 /// A bitmask.
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Serialize, Deserialize, Clone, Copy, PartialEq, Eq, Hash)]
 #[repr(transparent)]
 pub struct Mask {
     value: u8,

@@ -53,6 +53,7 @@ use std::ops::{
     BitOr, BitOrAssign,
     BitXor, BitXorAssign,
 };
+use serde::{Serialize, Deserialize};
 
 mod bool_ref;
 use bool_ref::*;
@@ -78,7 +79,7 @@ const fn deconstruct_nth(nth: usize) -> (usize, Mask) {
 }
 
 /// A vector of boolean values.
-#[derive(Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct BoolVec {
     /// The data allocated for this `BoolVec`.
     vec: Vec<u8>,
