@@ -63,6 +63,7 @@ pub use bool_ref::RefBoolMut;
 
 mod mask;
 use mask::*;
+use std::fmt::Display;
 
 pub(crate) fn count_ones(mut value: u8) -> u8 {
     let mut result = 0;
@@ -483,6 +484,13 @@ impl BoolVec {
             .sum::<usize>()
     }
 }
+
+impl Display for BoolVec {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{}", format!("{:02X?}", self.as_vec()))
+    }
+}
+
 
 impl<'s> BitAnd<&'s BoolVec> for &'s BoolVec {
     type Output = BoolVec;
