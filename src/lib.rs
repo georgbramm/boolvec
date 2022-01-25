@@ -174,6 +174,12 @@ impl BoolVec {
         }
     }
 
+    /// Get `BitVec` as Vec<u8>
+    pub fn as_vec(&self) -> Vec<u8> {
+        self.bytes().cloned().collect::<Vec<u8>>()
+    }
+
+
     /// Returns the number of booleans that are stored inside of this `BoolVec`.
     #[inline]
     pub fn count(&self) -> usize {
