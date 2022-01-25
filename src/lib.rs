@@ -86,7 +86,7 @@ pub struct BoolVec {
 
     /// The bit mask that locates the last boolean that have been pushed
     /// onto the `BoolVec`.
-    bit_mask: Mask,
+    pub bit_mask: Mask,
 }
 
 impl BoolVec {
@@ -112,7 +112,7 @@ impl BoolVec {
         }
     }
 
-    /// Creates a new `BoolVec` containing `count` booleans set to `value`.
+    /// Creates a random `BoolVec` containing `count` booleans.
     pub fn random(count: usize) -> Self {
         use rand::Rng;
         let (bytes, bit_mask) = if count == 0 {
@@ -161,6 +161,15 @@ impl BoolVec {
     pub fn from_vec(vec: Vec<u8>) -> Self {
         Self {
             vec,
+            bit_mask: Mask::VALUES[7],
+        }
+    }
+
+    /// Concatenates two `BitVec`s into a new one.
+    pub fn concatenate(&mut self, rhs: &mut BoolVec) -> Self {
+        assert_eq!(self.bit_mask, rhs.bit_mask);
+        Self {
+            vec: self.vec.iter().chain(rhs.vec.iter()).cloned().collect(),
             bit_mask: Mask::VALUES[7],
         }
     }
