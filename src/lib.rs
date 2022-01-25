@@ -113,10 +113,32 @@ impl BoolVec {
     }
 
     /// Creates a new `BoolVec` containing `count` booleans set to `value`.
+    pub fn random(count: usize) -> Self {
+        use rand::Rng;
+        let (bytes, bit_mask) = if count == 0 {
+            (Vec::new(), Mask::VALUES[7])
+        }
+        else {
+            let mut rng = rand::thread_rng();
+            // The bits that are not part of the vector should be set to 0.
+            let bytes = (0..count/8)
+                .into_iter()
+                .map(|_| rng.gen::<u8>())
+                .collect::<Vec<u8>>();
+            (bytes, Mask::VALUES[(count - 1) % 8])
+        };
+
+        Self {
+            vec: bytes,
+            bit_mask,
+        }
+    }
+
+    /// Creates a new `BoolVec` containing `count` booleans set to `value`.
     pub fn filled_with(count: usize, value: bool) -> Self {
         // The number of bytes we need to allocate.
         let value = if value { 255 } else { 0 };
-        
+
         let (bytes, bit_mask) = if count == 0 {
             (Vec::new(), Mask::VALUES[7])
         }
